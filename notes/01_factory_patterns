@@ -68,7 +68,7 @@ CHAPTER 1 - THE FACTORY PATTERNS
 
 
 
-- The Factory Method
+- The Factory Method Pattern
 
     - The factory method is based on a single function written to handle our object creation task.  
         We execute it, passing a parameter that provides information about what we want, and as a result,
@@ -129,7 +129,6 @@ CHAPTER 1 - THE FACTORY PATTERNS
         import json
 
         class JsonDataExtractor:
-
             def __init__(self, filepath):
                 self.data = dict()
                 with open(filepath, mode='r', encoding='utf-8') as f:
@@ -145,7 +144,6 @@ CHAPTER 1 - THE FACTORY PATTERNS
         import xml.etree.ElementTree as etree
 
         class XmlDataExtractor:
-
             def __init__(self, filepath):
                 self.tree = etree.parse(filepath)
 
@@ -217,3 +215,46 @@ CHAPTER 1 - THE FACTORY PATTERNS
 
             # Trying to process other file types raises exception
             sqllite_factory = extract_data_from('person.sq3')
+
+
+
+- The Abstract Factory Pattern
+
+    - The abstract factory design pattern is a generalization of the factory method.  Basically, an
+        abstract factory is a group of factory methods, where each factory method is responsible
+        for generating a different kind of object.
+
+
+    - The 'factory_boy' package provides an abstract factory for creating Django models in tests.  It
+        is used for creating instances of models that support test-specific attributes.
+
+
+    - Like the factory method pattern, the abstract factory makes tracking object creation easier, it
+        decouples object creation from object usage, and it gives us the potential to improve the memory
+        usage and performance of our application.  If we find out that our application requires many
+        factory methods, which it makes sense to combine to create a family of objects, we end up with
+        an abstract factory.
+
+
+    - The classic example of an abstract factory is to change the look and feel of an application 
+        (for example, Apple-like, Windows-like, etc.) for the user while the application is in use, 
+        without having to terminate it and start again.
+
+
+
+- Abstract Factory Example
+
+    - Here, we start with a kid's game called 'FrogWorld'.  The main hero is a frog who enjoys eating
+        bugs.
+
+        class Frog:
+            def __init__(self, name):
+                self.name = name
+
+            def __str__(self):
+                return self.name
+
+            def interact_with(self, obstacle):
+                act = obstacle.action()
+                msg = f'{self} the Frog encounters {obstacle} and {act}!'
+                print(msg)
