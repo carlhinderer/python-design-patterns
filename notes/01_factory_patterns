@@ -121,3 +121,99 @@ CHAPTER 1 - THE FACTORY PATTERNS
             </gender> 
           </person> 
         </persons>
+
+
+    - Here is the extractor for JSON data.  Note that the 'property' decorator is used to make
+        'parsed_data()' appear as a normal attribute instead of a method.
+
+        import json
+
+        class JsonDataExtractor:
+
+            def __init__(self, filepath):
+                self.data = dict()
+                with open(filepath, mode='r', encoding='utf-8') as f:
+                    self.data = json.load(f)
+
+            @property
+            def parsed_data(self):
+                return self.data
+
+
+    - Here is the extractor for XML data.
+
+        import xml.etree.ElementTree as etree
+
+        class XmlDataExtractor:
+
+            def __init__(self, filepath):
+                self.tree = etree.parse(filepath)
+
+            @property
+            def parsed_data(self):
+                return self.tree
+
+
+    - Here, the 'dataextraction_factory()' function is a factory method.  It returns the correct 
+        extractor based on the file extension.
+
+
+        def data_extraction_factory(filepath):
+            if filepath.endswith('json'):
+                extractor = JsonDataExtractor
+            elif filepath.endswith('xml'):
+                extractor = XmlDataExtractor
+            else:
+                raise ValueError('Cannot extract data from {}'.format(filepath))
+            return extractor(filepath)
+
+
+        def extract_data_from(filepath):
+            factory_obj = None
+            try:
+                factory_obj = data_extraction_factory(filepath)
+            except ValueError as e:
+                print(e)
+            return factory_obj
+
+
+        def main():
+            # Process json file
+            json_factory = extract_data_from('movies.json')
+            json_data = json_factory.parsed_data
+
+            print(f'Found: {len(json_data)} movies')
+            for movie in json_data:
+                print(f"Title: {movie['title']}")
+                year = movie['year']
+                if year:
+                    print(f"Year: {year}")
+                director = movie['director']
+                if director:
+                    print(f"Director: {director}")
+                genre = movie['genre']
+                if genre:
+                    print(f"Genre: {genre}")
+                print()
+
+
+            # Process xml file
+            xml_factory = extract_data_from('persons.xml')
+            xml_data = xml_factory.parsed_data
+
+            xml_factory = extract_data_from('data/person.xml')
+            xml_data = xml_factory.parsed_data
+            liars = xml_data.findall(f".//person[lastName='Liar']")
+            print(f'found: {len(liars)} persons')
+            for liar in liars:
+                firstname = liar.find('firstName').text
+                print(f'first name: {firstname}')
+                lastname = liar.find('lastName').text
+                print(f'last name: {lastname}')
+                [print(f"phone number ({p.attrib['type']}):", p.text) 
+                for p in liar.find('phoneNumbers')]
+                print()
+
+
+            # Trying to process other file types raises exception
+            sqllite_factory = extract_data_from('person.sq3')
