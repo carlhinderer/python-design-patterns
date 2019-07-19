@@ -1,0 +1,40 @@
+-----------------------------------------------------------
+CHAPTER 1 - THE FACTORY PATTERNS
+-----------------------------------------------------------
+
+- Gang Of Four
+
+    - The patterns here were popularized by the book 'Design Patterns: Elements of Reusable 
+        Object-Oriented Software' by Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides.
+
+
+    - The GoF defined 23 original design patterns:
+
+        Creational:
+          1. Factory Method
+          2. Abstract Factory
+          3. Builder
+          4. Prototype
+          5. Singleton
+
+        Structural:
+          6. Adapter
+          7. Decorator
+          8. Bridge
+          9. Facade
+          10. Flyweight
+          11. Composite
+          12. Proxy
+
+        Behavioral:
+          13. Chain of Responsibility
+          14. Command
+          15. Observer
+          16. State
+          17. Interpreter
+          18. Strategy
+          19. Memento
+          20. Iterator
+          21. Template
+          22. Mediator
+          23. Visitor
