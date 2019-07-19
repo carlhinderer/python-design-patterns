@@ -38,3 +38,86 @@ CHAPTER 1 - THE FACTORY PATTERNS
           21. Template
           22. Mediator
           23. Visitor
+
+
+
+- Creational Design Patterns
+
+    - Creational design patterns deal with different aspects of object creation.  Their goal is to 
+        provide better alternatives for situations where direct object creation ('__init__()' calls)
+        is not convenient.
+
+
+
+- Factory Patterns
+
+    - In the factory design pattern, a client asks for an object without knowing which class is used
+        to generate it.  This simplifies the object creation process, because it is easier to track
+        which objects are created if this is done through a central function.
+
+
+    - A factory reduces complexity by decoupling the code that creates an object from the code that
+        uses it.
+
+
+    - Factories typically come in 2 forms:
+
+        1. Factory Method   = a method that returns a different object per input parameter
+
+        2. Abstract Factory = a group of factory methods used to create a family of related objects
+
+
+
+- The Factory Method
+
+    - The factory method is based on a single function written to handle our object creation task.  
+        We execute it, passing a parameter that provides information about what we want, and as a result,
+        the desired object is created.  We are not required to know how the resulting object is
+        implemented.
+
+
+    - If you realize you cannot track the objects created in your application because the code that
+        creates them is in many different places, consider using the factory method pattern.
+
+
+
+- Factory Method Example
+
+    - In this example, we'll create a client that can read both XML and JSON files.
+
+
+        # movies.json
+        [
+          {"title":"After Dark in Central Park",
+           "year":1900, 
+           "director":null, "cast":null, "genre":null},
+          {"title":"Boarding School Girls' Pajama Parade",
+           "year":1900, 
+           "director":null, "cast":null, "genre":null},
+          {"title":"Buffalo Bill's Wild West Parad",
+           "year":1900, 
+           "director":null, "cast":null, "genre":null}
+        ]
+
+
+        # persons.xml
+        <persons>
+          <person> 
+            <firstName>Patty</firstName> 
+            <lastName>Liar</lastName> 
+            <age>20</age> 
+            <address> 
+              <streetAddress>18 2nd Street</streetAddress> 
+              <city>New York</city> 
+              <state>NY</state> 
+              <postalCode>10021</postalCode> 
+            </address> 
+            <phoneNumbers> 
+              <phoneNumber type="home">212 555-1234</phoneNumber> 
+              <phoneNumber type="mobile">001 452-8819</phoneNumber> 
+            </phoneNumbers> 
+            <gender> 
+              <type>female</type> 
+            </gender> 
+          </person> 
+        </persons>
