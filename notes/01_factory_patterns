@@ -258,3 +258,76 @@ CHAPTER 1 - THE FACTORY PATTERNS
                 act = obstacle.action()
                 msg = f'{self} the Frog encounters {obstacle} and {act}!'
                 print(msg)
+
+
+    - There can be many different kinds of obstacles, but for our example, an obstacle can only be a
+        bug.  When the frog encounters a bug, only one action is supported.  It eats it.
+
+        class Bug:
+            def __str__(self):
+                return 'a bug'
+
+            def action(self):
+                return 'eats it'
+
+
+    - The 'FrogWorld' class is an abstract factory.  Its main responsibilities are creating the main
+        character and obstacles in the game.  It keeps its creation methods ('make_character' and
+        'make_obstacle') separate and generic allows us to change the factory dynamically.
+
+      In a statically typed language, the abstract factory would be an abstract class or interface
+        with empty methods.  In Python, this is not required, because the types are checked at runtime.
+
+
+        class FrogWorld:
+            def __init__(self, name):
+                print(self)
+                self.player_name = name
+
+            def __str__(self):
+                return '\n\n\t------ Frog World -------'
+
+            def make_character(self):
+                return Frog(self.player_name)
+
+            def make_obstacle(self):
+                return Bug()
+
+
+    - The 'WizardWorld' game is very similar to FrogWorld.  The only difference is that the wizard
+        battles monsters like 'orks' instead of eating bugs.
+
+        class Wizard:
+            def __init__(self, name):
+                self.name = name
+
+            def __str__(self):
+                return self.name
+
+            def interact_with(self, obstacle):
+                act = obstacle.action()
+                msg = f'{self} the Wizard battles against {obstacle} and {act}!'
+                print(msg)
+
+
+        class Ork:
+            def __str__(self):
+                return 'an evil ork'
+
+            def action(self):
+                return 'kills it'
+
+
+        class WizardWorld:
+            def __init__(self, name):
+                print(self)
+                self.player_name = name
+
+            def __str__(self):
+                return '\n\n\t------ Wizard World -------'
+
+            def make_character(self):
+                return Wizard(self.player_name)
+
+            def make_obstacle(self):
+                return Ork()
