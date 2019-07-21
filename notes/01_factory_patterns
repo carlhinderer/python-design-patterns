@@ -199,8 +199,6 @@ CHAPTER 1 - THE FACTORY PATTERNS
             xml_factory = extract_data_from('persons.xml')
             xml_data = xml_factory.parsed_data
 
-            xml_factory = extract_data_from('data/person.xml')
-            xml_data = xml_factory.parsed_data
             liars = xml_data.findall(f".//person[lastName='Liar']")
             print(f'found: {len(liars)} persons')
             for liar in liars:
