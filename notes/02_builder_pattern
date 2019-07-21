@@ -1,0 +1,39 @@
+-----------------------------------------------------------
+CHAPTER 2 - THE BUILDER PATTERN
+-----------------------------------------------------------
+
+- The 'factory method' and 'abstract factory' patterns provide ways to improve object 
+    creation.  The builder pattern separates the construction of a complex object from its 
+    representation.  It is used when an object must be created in multiple steps, and different
+    representations of the same construction are required.
+
+
+
+- The difference between the factory and builder patterns is that the factory pattern creates an object
+    in a simple step, while a builder pattern creates an object in multiple steps through the use of a
+    director.  Also, the factory pattern immediately returns a new object, while in the builder pattern
+    the client code explicitly asks the director to return the final object when it needs it.
+
+
+
+- It is also often used in statically typed language to support constructors with different parameters,
+    but we can solve that problem easily in Python with named parameters or argument list unpacking.
+
+
+
+- For example, suppose that we want to create an HTML page generator. The basic structure 
+    (construction part) of an HTML page is always the same: it begins with <html> and finishes 
+    with </html>, inside the HTML section are the <head> and </head> elements, inside the head 
+    section are the <title> and </title> elements, and so forth.  But the representation of the 
+    page can differ.
+
+  The HTML page generation problem can be solved using the builder pattern. In this pattern, there 
+    are two main participants:
+
+    1. The builder  = The component responsible for creating the various parts of a complex object. In 
+                        this example, these parts are the title, heading, body, and the footer of the page.
+
+    2. The director = The component that controls the building process using a builder instance. It calls 
+                        the builder's functions for setting the title, the heading, and so on. And, using 
+                        a different builder instance allows us to create a different HTML page without
+                        touching any of the code of the director.
