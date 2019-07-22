@@ -1,0 +1,42 @@
+-----------------------------------------------------------
+CHAPTER 3 - OTHER CREATIONAL PATTERNS
+-----------------------------------------------------------
+
+- The 'prototype pattern' is useful when one needs to create objects based on an existing object by
+    using a cloning technique.
+
+  The 'singleton pattern' offers a way to implement a class from which you can only create one object.
+    There have always been discussions about whether this pattern should be used, and some people 
+    consider it an anti-pattern.
+
+
+
+- The Prototype Pattern
+
+    - Sometimes, we want an exact copy of an object.  This can allow us to have independent copies of
+        data that we can mutate without worrying about affecting each other's state.
+
+
+
+- Prototype Pattern Example
+
+    - In this example, we have a 'Website' class that holds useful information about a website.
+
+        class Website:
+            def __init__(self, name, domain, description, author, **kwargs):
+                self.name = name
+                self.domain = domain
+                self.description = description
+                self.author = author
+                for key in kwargs:
+                    setattr(self, key, kwargs[key])
+
+            def __str__(self):
+                summary = [f'Website "{self.name}"\n',] 
+                infos = vars(self).items()
+                ordered_infos = sorted(infos)
+                for attr, val in ordered_infos:
+                    if attr == 'name':
+                        continue
+                    summary.append(f'{attr}: {val}\n')
+                return ''.join(summary)
