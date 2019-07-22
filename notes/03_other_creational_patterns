@@ -88,3 +88,25 @@ CHAPTER 3 - OTHER CREATIONAL PATTERNS
                     description='Experimentation for techniques featured on the blog', 
                     category='Membership site',
                     creation_date='2018-08-01')
+
+
+
+- The Singleton Pattern
+
+    - The singleton pattern restricts the instantiation of a class to a single object, which is useful
+        when you need to coordinate actions for the system.  To ensure this works, we need mechanisms to
+        prevent the instantiation of the class more than once and to also prevent cloning.
+
+
+    - Other possible use cases for the singleton pattern are:
+
+        1. Controlling concurrent access to a shared resource (ie the class managing the connection to
+             a database)
+
+        2. A service or resource that is transversal in the sense that it can be accessed from different
+             parts of the application or by different users and do its work (ie the core of a logging
+             system).
+
+
+
+- 
