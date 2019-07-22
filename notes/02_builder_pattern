@@ -197,3 +197,16 @@ CHAPTER 2 - THE BUILDER PATTERN
              pizza = waiter.pizza
              print()
              print(f'Enjoy your {pizza}!')
+
+
+
+- We use the builder pattern for creating an object in situations where using the factory pattern is
+    not a good option.  A builder pattern is usually better than a factory pattern if:
+
+    1. We want to create a complex object (an object composed of many parts and created in different
+         steps that might need to follow a specific order).
+
+    2. Different representations of the object are required, and we want to keep the construction of
+         an object decoupled from its representation.
+
+    3. We want to create an object at one point in time, but access it at a later point.
