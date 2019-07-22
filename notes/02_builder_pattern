@@ -167,3 +167,33 @@ CHAPTER 2 - THE BUILDER PATTERN
             @property
             def pizza(self):
                 return self.builder.pizza
+
+
+    - Now, we create the main exectution, including a method to validate that the pizza choice is valid.
+
+         def validate_style(builders):
+             try:
+                 input_msg = 'What pizza would you like, [m]argarita or [c]reamy bacon?'
+                 pizza_style = input(input_msg)
+                 builder = builders[pizza_style]()
+                 valid_input = True
+             except KeyError:
+                 error_msg = 'Sorry, only margarita (key m) and creamy bacon (key c) are available'
+                 print(error_msg)
+                 return (False, None)
+             return (True, builder)
+
+
+         def main():
+             builders = dict(m=MargaritaBuilder, c=CreamyBaconBuilder)
+             valid_input = False
+             while not valid_input:
+                 valid_input, builder = validate_style(builders)
+             print()
+
+             waiter = Waiter()
+             waiter.construct_pizza(builder)
+
+             pizza = waiter.pizza
+             print()
+             print(f'Enjoy your {pizza}!')
